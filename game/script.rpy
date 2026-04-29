@@ -50,18 +50,13 @@ default countdown_time = 5
 
 define c = Character("Candy", color="#1d7e42", callback=beepy_voice)
 define m = Character("Me", color="#B20100", callback=beepy_voice)
-define k = Character("Kelp", color="#f7ba2cff", callback=beepy_voice)
 define f = Character("Fish", color="#2b3b7f", callback=beepy_voice)
 define t = Character("???", color="#105c53", callback=beepy_voice)
 
 image candy = "defcan.png"
 image candy surprised = "supcan.png"
 image candy smirk = "smirkcan.png"
-image kelp = "defkelpplace.png"
-image kelp amused = "teeheekelpplace.png"
-image kelp surprised = "supkelpplace.png"
-image kelp serious = "srskelpplace.png"
-image kelp sad = "sadkelpplace.png"
+image candy look = "lookcan.png"
 image fish = "deffish.png"
 image fish eek = "eekfish.png"
 image fish daring = "lookfish.png"
@@ -190,12 +185,12 @@ label start:
 
     c "And as a fisher, try your best to only catch fish. No sharks, turtles, or any of the like. And don't cause environmental damage."
 
-    c "To do this, you need to use the right fishing methods. Don't use bottom trawls. Bottom trawls are nets dragged across the sea floor. Very destructive!"
+    c "To do this, you need to use the right fishing methods."
+    
+    c "Don't use bottom trawls. Bottom trawls are nets dragged across the sea floor. Very destructive!"
 
     show candy surprised
-
     c "And don't use dynamite???? That is really illegal. But I've seen it happen, unfortunately."
-
     show candy smirk
     c "Best to stick with the methods I show you."
     show candy -smirk
@@ -204,7 +199,7 @@ label start:
 
     m "What are fisheries?"
 
-    c "They're basically fishing businesses. A lot of 'em just care about profit, and only profit. The work is very physically taxing."
+    c "They're basically fishing businesses. A lot of 'em just care about profit, and only profit. The quotas are terrible and the work is very physically taxing."
 
     "(Some time later...)"
 
@@ -212,17 +207,17 @@ label start:
 
     c "Any questions so far?"
 
-    m "I'm hungry"
+    m "Nope"
 
-    c "Ok, that'll be it for today."
+    c "Ok, that'll be it for today. Let's fish again tomorrow morning!"
 
-    c "Let's stop by your house to see if it's done."
+    c "And let's stop by your house to see if it's done."
 
     scene bg mnhouse
     show candy
     with fade
 
-    c "Seems like the movers just finished up. That's good."
+    c "..Yep, seems good to me!"
 
     c "Well, see ya later, alligator!"
 
@@ -232,11 +227,7 @@ label start:
 
     m "Home sweet home..."
 
-    m "Looks just like my old home, just with a different floor plan."
-
-    m "How did they know what my old home looked like?"
-
-    m "Let's see if there's anything in the fridge."
+    m "Looks just like my old home."
 
     scene bg mhouse with dissolve
 
@@ -246,361 +237,279 @@ label start:
 
     m "...Who is that at the door?"
 
-    show kelp with fade
+    show fish with fade
 
-    k "HAIIIIIIIIIIIIIII! My name's Kelp and I'm your neighbor!!"
+    f "Well hello there! Ny name's Fish!"
 
-    show kelp amused
-
-    k "Welcome to Salmontin, Tin! (hahaha, tin tin...)"
+    show fish eek
+    f "Welcome to Salmontin, Tin! (heheheh, tin tin...)"
+    show fish -eek
 
     m "(Is everyone gonna say this?)"
 
-    show kelp -amused
+    f "The town is very excited to get to know you. We've heard a bit about you already and you seem great."
 
-    k "The town is very excited to get to know you! We've heard a bit about you already and you seem great!"
-
-    k "If you ever need a fishing buddy, I'd be stoked to be one!"
+    f "I'm offering fishing lessons for free, if you need any. I'd be more than happy to help, I love meeting new people and teaching people new things."
 
     m "One more fishing buddy couldn't hurt."
 
-    k "You have one already? Who is..."
+    f "You have one already? Who is..."
 
-    show kelp surprised with hpunch
-    k "Oh."
-    show kelp -surprised
+    show fish serious
+    f "Oh."
+    show fish daring
 
-    k "Candy, right?"
-
+    f "Candy, right?"
+    show fish -daring
     m "Yep."
 
-    k "Haha, I know her! She's like one of the best fishers in town."
+    show fish eek
+    f "Heh, I know her! She's one of the best fishers in town. Not as good as me though!"
+    show fish -eek
 
-    k "Y'know, you might hear some rumors about her, but I wouldn't pay them any mind. A lot of people stretch the truth."
+    f "Y'know, you might hear some rumors about her, but I wouldn't pay them any mind. A lot of people stretch the truth."
 
-    show kelp serious
-
-    k "I can't say too much about this, so don't ask."
+    show fish daring
+    f "And before you ask, no I won't tell you what those rumors are."
+    show fish -daring
 
     m "(I was gonna ask...)"
 
-    k "Speaking of people you should stay away from, stay away from Fish. He's going to destroy this town with the way he fishes!"
+    f "Don't mention it to her either, it makes her very upset."
 
-    k "I know his name is Fish, but he doesn't need to overfish. He needs to stop fishing so much!"
+    f "If it's alright with you, we could go on a little fishing trip today. After you get ready, of course!"
 
-    m "(The guy named Fish is a bad fisher??)"
+    f "The town is still working on getting you a boat, so in the meantime, you'll have to fish with all of us!"
 
-    show kelp -serious
+    m "Let's go in the afternoon. Candy and I made plans to go fishing this morning."
 
-    k "If it's alright with you, we could go on a little fishing trip today. After you get ready, of course!"
+    f "Ok, you can find me at the town market when you're done."
 
-    k "The town is still working on getting you a boat, so in the meantime, you'll have to fish with all of us!"
-
-    m "Sure."
-
-    k "Yayy!! See you later."
-
-    scene gboat with fade
+    scene cboat
+    show candy at left
+    with fade
 
     "Later..."
 
-    show kelp with fade
-    k "You're a beginner, right? So we'll start off with fishing rods! They're a classic."
-
-    k "They're not very efficient for commercial fishing, but you still need to know how to use them efficiently."
-
-    k "We use them for town fishing competitions, and the winners get a trophy!"
-
-    k "First, we attach the bait to the hook. Then we cast the rod into the water and wait."
-
-    k "When you feel a tug, reel it in!"
-
-    k "Any questions in the meantime?"
+    c "It's nice to see you again, Tin."
     
-    default kelpq1 = set()
-    default knorumor = False
-    $ kdone = False
+    c "Since we caught quite a bit of fish yesterday, let's do some casual fishing next."
+    
+    c "It's important not to overfish! We'll catch fish one at a time with fishing rods."
 
-    while not kdone:
+    c "They're not very efficient for commercial fishing, but you still need to know how to use them efficiently. We use them for town fishing competitions!"
+
+    c "First, we attach the bait to the hook. Then we cast the rod into the water and wait."
+
+    c "When you feel a tug, reel it in!"
+
+    c "Any questions in the meantime?"
+    
+    default canq1 = set()
+    default knorumor = False
+    $ cdone = False
+
+    while not cdone:
         menu:
-            set kelpq1
+            set canq1
             "Good fishing methods?":
                 $ knorumor = True
-                show kelp
-                k "Hook-and-line fishing is good. They're basically lines with with hooks attached. There's many types of hook-and-line-fishing."
+                show candy
+                c "Hook-and-line fishing is good. They're basically lines with with hooks attached. There's many types of hook-and-line-fishing."
                 
-                k "Longlines, like the name implies, are long lines with a bunch of baited hooks attached. There's buoys keeping the line afloat."
+                c "Longlines, like the name implies, are long lines with a bunch of baited hooks attached. There's buoys keeping the line afloat."
 
-                k "Another good fishing method is harpooning. You just aim and throw. It's very fun!"
+                c "Another good fishing method is harpooning. You just aim and throw. It's very fun!"
 
-                k "Any other questions?"
+                c "Any other questions?"
 
             "What does overfishing do?":
                 $ knorumor = True
-                show kelp
-                k "It depletes the population of marine species faster than they can reproduce. Messes up the whole ecosystem."
+                show candy
+                c "It depletes the population of marine species faster than they can reproduce. Messes up the whole ecosystem."
 
-                k "Makes fishing harder for everyone. People can't get the fish they want and fishers struggle more and more to fish enough fish."
+                c "Makes fishing harder for everyone. People can't get the fish they want and fishers struggle more and more to fish enough fish."
 
-                k "They need to fish to make a living, but they're limited on what they can fish, so prices for fish have gone way up."
+                c "They need to fish to make a living, but they're limited on what they can fish, so prices for fish have gone way up."
 
-                k "Fishers aren't the only ones who rely on fish, people eat fish!! Most of our restaurants serve seafood, so they have to raise their prices as well."
+                c "Fishers aren't the only ones who rely on fish, people eat fish!! Most of our restaurants serve seafood, so they have to raise their prices as well."
 
-                k "And those fishing subsidies sure don't help either!"
+                c "And those fishing subsidies sure don't help either!"
 
-                k "Fishing subsidies are monetary grants given by the government to help fisheries. You'd think they help, but they don't!"
+                c "Fishing subsidies are monetary grants given by the government to help fisheries. You'd think they help, but they don't!"
 
-                k "All it does is encourage fisheries to overfish to make more money. Bad for everyone else, and for themselves too, but they can only think in the present moment, apparently."
+                c "All it does is encourage fisheries to overfish to make more money. Bad for everyone else, and for themselves too, but they can only think in the present moment, apparently."
 
-                k "That's why you should never join a fishery. I was in one for a while back when I was a newbie and it was grueling. Terrible quotas."
+                show candy surprised
+                c "Even the fish were tired of it! They whispered to me..."
+                show candy -surprised
 
-                show kelp surprised
-                k "Even the fish were tired of it! They whispered to me..."
-                show kelp -surprised
+                c "Oh! By the way, fishery means fishing industry, at least in general. Did I mention that already?"
 
-                k "Oh! By the way, fishery means fishing industry, at least in general. If there's ever a term you don't know, tell me."
+                c "Any other questions?"
 
-                k "Any other questions?"
+            "The rumors about you?" if knorumor == False:
+                $ caff -= 1
+                c "..."
 
-            "The rumors about Candy?" if knorumor == False:
-                $ kaff -= 1
-                show kelp serious
-                k "As I said, I can't talk about that...Sorry."
+                show candy look
+                c "Who told you about that?"
 
-                k "And double as I said, only fishing questions..You got any fishing questions?"
-                show kelp -serious
+                m "Fish told me. He wasn't specific though."
+
+                show candy surprised
+                c "He's one to talk! Rumor has it that he's the town's worst fisher!"
+                show candy -surprised
+
+                show candy look
+                c "Not in terms of skill, but in terms of damage. He is demolishing the fish populations!"
+
+                c "And sorry, I don't want to talk too much about my rumors. Just know that people have been slandering me."
 
             "No questions":
-                k "That's alright."
+                show candy
+                c "That's alright."
 
-                k "Oh! I almost forgot. I need to tell you about this amazing new fishing technology, LED nets."
+                c "Oh! I almost forgot. I need to tell you about this amazing new fishing technology, LED nets."
 
-                k "They're nets with LED lighting that are great for targeting specific species since different LED colors attract different species."
+                c "They're nets with LED lighting that are great for targeting specific species since different LED colors attract different species."
 
-                k "Different species have different responses to the different lights. Pretty cool!"
+                c "Different species have different responses to the different lights. Pretty cool!"
 
-                k "They're also great at reducing bycatch! Bycatch is the unintentional capture of non-target species when trying to catch other species. It's against this town's rules to have too much bycatch."
+                c "They're also great at reducing bycatch! Bycatch is the unintentional capture of non-target species when trying to catch other species. It's against this town's rules to have too much bycatch."
 
-                k "I've been introducing these nets to all the fishers in town. Since then, a lot less turtles have been caught in nets. Turtles are my favorite animal."
+                c "I've been introducing these nets to all the fishers in town. Since then, a lot less turtles have been caught in nets. Turtles are my favorite animal."
 
-                $ kdone = True
+                $ cdone = True
                 jump fishingRod
 
 label fishingRod:
     
     "*Glub glub bubble bubble*"
 
-    k "Oh?? A fishie? Reel it in!"
+    c "Oh?? A fishie? Reel it in!"
 
     call screen rod_game with pixellate
 
 label contin1:
-    k "Nice! That's a very good fish."
+    c "Nice! That's a very good fish."
 
-    k "That would sell for like, a decent amount of money."
+    c "That would sell for like, a decent amount of money."
 
-    k "Oop! I've caught a fish too."
+    c "Oop! I've caught a fish too."
 
-    k "Yay, it's pretty good as well!"
+    c "Yay, it's pretty good as well!"
 
-    k "This was a nice little fishing trip."
+    c "This was a nice little fishing trip."
 
     menu:
         "You make it enjoyable":
-            $ kaff += 1
-            show kelp amused
-            k "Whaa-?"
+            $ caff += 1
+            show candy surprised
+            c "Whaa-?"
     
-            k "gashgfajdksgfjgfjhahaaAAAAA"
-            show kelp -amused
+            c "gashgfajdksgfjgfjhahaaAAAAA"
+            show candy -surprised
 
-            k "I enjoy your company too."
+            c "I enjoy your company too."
 
-            k "You are a nice person, Tin."
+            c "You are a nice person, Tin."
 
-            jump kelpRoute
+            jump canRoute
 
         "It was so boring":
-            show kelp serious
+            show candy smirk
+            c "..Oh..."
 
-            k "..Oh..."
-
-            k "..What did you find boring about it?"
+            c "..What did you find boring about it?"
 
             menu:
                 "You":
-                    $ kaff -= 2
-                    jump kelpless
+                    $ caff -= 2
+                    jump canless
 
                 "No, it's just that I feel tired":
-                    show kelp
+                    show candy
 
-                    k "Ohhhhh. That makes sense, you just got here after all. And my condolences for what happened to your old house!"
+                    c "Ohhhhh. That makes sense, you just got here after all. And my condolences for what happened to your old house!"
 
-                    jump kelpRoute
+                    jump canRoute
 
-label kelpless:
-    k "..."
+label canless:
+    c "..."
 
-    show kelp sad with hpunch
+    show candy look with hpunch
 
-    k "Why are you so mean?!?"
+    c "Wow."
 
-    k "I'm going to sail us back to the dock, but I'll do so very sadly!"
-
-    k "Don't talk to me for a while, ok? I'll be too busy drowning in sadness!"
+    c "I'm going to sail us back to the dock. Don't talk to me for a while, ok?"
 
     jump fishRoute
 
-label kelpRoute:
-    k "Let's head back to the dock, I'll show you where to sell your fish at."
+label canRoute:
+    c "Let's head back to the dock, I'll show you where to sell your fish at."
 
-    scene bg market with fade
+    scene bg market
+    show candy
+    with fade
 
-    show kelp
+    c "This is the market!! We sell fish here."
 
-    k "This is the market!! We sell fish here."
-
-    k "All you have to do is stand around and wait for someone to offer for your fish."
+    c "All you have to do is stand around and wait for someone to offer for your fish."
 
     t "Hey, I'll buy those fish from y'all for $20!"
 
-    k "(Go for it!)"
+    c "(Go for it!)"
 
     m "Sold!"
 
     t "Pleasure doing business with ya."
 
-    k "See? Nice and easy. The townspeople here are reasonable, so you can usually agree to the first price offered."
+    c "See? Nice and easy. The townspeople here are reasonable, so you can usually agree to the first price offered."
 
-    k "Keep the money, I insist. I've got quite a fortune."
+    c "Keep the money, I insist."
 
-    m "Thanks, Kelp!"
+    m "Thanks, Candy!"
 
-    k "No problem, Tin."
+    c "No problem, Tin."
 
-    k "Come with me, I'll show you a great coffee shop nearby."
+    c "Y'know, just about everyone in this town is very welcoming and friendly."
 
-    k "And along the way, I can tell you more about the town."
+    c "If anyone needs help, people will help. That's what I love about this town. We all look out for each other."
 
-    k "Y'know, just about everyone in this town is very welcoming and friendly."
+    c "Well, for the most part."
 
-    k "If anyone needs help, people will help. That's what I love about this town. We all look out for each other."
+    c "Some people...really don't care about this town. Or about the world, it seems like."
 
-    k "Well, for the most part."
+    c "Just be wary of people's actions. Some people are very friendly, but very selfish too."
 
-    k "Some people...really don't care about this town. Or about the world, it seems like."
+    c "..I know I said I wouldn't talk about this, but it's best you hear it from me."
 
-    k "Just be wary of people's actions. Some people are very friendly, but very selfish too."
+    c "A couple months ago, there was an incident. There used to be a fisher in this town, a horrible fisher who used horrible fishing methods."
 
-    k "A prime example is this guy named Fish. I've told him many times about sustainable fishing methods, but he just chuckles."
+    c "One day, I caught this fisher using dynamite to fish. I reported them and they were sent to serve 15 years in prison."
 
-    k "He will probably try to approach you at some point. Keep a safe distance and don't be influenced by him."
+    c "The problem was that this fisher was someone who donated a lot of money to the town."
 
-    k "It's good that you're friends with Candy. She's a very responsible fisher. Sets a good example for everyone."
+    c "This person was very rich, so they were planning on getting out on bail, but I convinced the judges that what they did was too severe to allow for bail."
 
-    k "Sad that no one wants to follow her example after that one thing."
-    
-    k "..I know I said I wouldn't talk about what happened with her, but it's best you hear it from me."
+    c "A lot of people think the punishment was too severe. The fisher was quite young and had a bright future."
 
-    k "A couple months ago, there was an incident. There used to be a fisher in this town, a horrible fisher who used horrible fishing methods."
+    c "It kind of makes me feel guilty."
 
-    k "One day, Candy caught this fisher using dynamite to fish. She reported them and they were sent to serve 15 years in prison."
+    c "I was holding off on telling you about this incident because I worried it would affect how you view me."
 
-    k "The problem was that this fisher was someone who donated a lot of money to the town."
+    c "If you're still cool with me, we could fishing tomorrow. I'm could teach you sustainable fishing methods."
 
-    k "This person was very rich, so they were planning on getting out on bail, but Candy convinced the judges that what they did was too severe to allow for bail."
+    m "Sure."
 
-    k "Many people think that the punishment was too severe. The fisher was quite young and had a bright future."
-
-    k "..I'm kind of neutral on this. I don't agree with what Candy did, but...She's my friend, y'know?"
-    
-    k "But I've totally distanced myself from her since then, so I guess I'm not that great of a friend..."
-
-    menu:
-        "It's ok":
-            m "It's only natural. You were conflicted and didn't know what to do."
-
-            k "I guess that's true."
-
-        "People should stay away from her":
-            k "..Maybe. If you think what she did was that bad...I guess I'm biased because I'm her friend."
-
-    k "I was holding off on telling you about this incident because I worried it would affect how you view her."
-
-    k "The whole town already hates her, she needs some support."
-
-
-
-    menu:
-        "Do you have a good reputation in this town?":
-            k "Yep!"
-
-            k "I am a quite respected pirate in this town."
-            
-            m "Pirate?"
-            
-            k "Yep, but only in regards to sailing the seven seas. I'm on a journey to sail the whole world."
-
-            k "When I first started my journey, I rushed a lot. I wanted to return to my friends back home."
-            
-            k "But now I take my time with the places I visit. It just feels right."
-
-            k "I learned that I had to take time to discover myself and figure out who I am."
-
-        "Why do you love fishing?":
-            k "Why do I love fishing?"
-            
-            k "I've always loved the ocean. I love being near it."
-
-
-            k "When I was a kid, I used to go to the beach like every day."
-
-
-            k "There were these crabs who always greeted me when I arrived."
-
-
-            k "And now generations of crabs have passed and they still greet me! That's why I don't eat crabs."
-            
-            k "Actually, I don't eat any seafood. I don't like the smell or taste."
-            
-            menu:
-                "Me neither":
-                    k "Finally someone understands me!"
-
-                "What about kelp?":
-                    k "Ohh! Actually I can eat kelp, and seaweed, and anything that's not an animal."
-
-
-        "Where have you fished?":
-            k "I travel a lot, so I've fished in many places. I've fished in Italy, Brazil, Algeria, Australia, Laos..."
-
-
-            k "It's really fun meeting fishers from other countries. I've made a lot of international fishing friends."
-
-
-            k "I've also fished in just about every state in this nation."
-
-
-            m "What were your best and worst fishing experiences?"
-
-
-            k "My best fishing experiences have been in this town. It's where I feel most at home."
-
-
-            k "My worst fishing experience was in a town a couple thousand miles away from here."
-
-
-            k "What I saw there was devastating."
-
-
-
+    c "Ok, that's nice."
     return
 
 label fishRoute:
     scene bg market with fade
 
-    m "..Kelp really just disappeared."
+    m "..Candy really just disappeared."
 
     m "And I'm just here with a fish in hand."
 
@@ -610,31 +519,13 @@ label fishRoute:
 
     m "Hello"
 
-    f "You're new around here, right?"
+    f "It's me, Fish."
 
-    f "Welcome to town, it's nice to meet you."
+    f "It's nice to meet you again."
 
-    m "Thanks, it's nice to meet you too."
+    m "Thanks, it's nice to meet you again too."
 
-    f "My name is Fish. What's your name?"
-
-    m "Tin"
-
-    f "Nice name. Your name isn't related to food, that's rare in this town."
-    
-    f "..Though I guess food could be in tins! It doesn't matter anyway, we're very accepting of people, foody name or not, so don't worry."
-
-    f "You've got a fish in your hands. Someone been teaching you to fish? Or are you already an experienced fisher?"
-
-    m "Candy and Kelp are teaching me."
-
-    show fish eek
-    f "Hehe, they're good fishers. Not as good as me though!"
-    show fish -eek
-
-    f "I'm offering fishing lessons for free, if you need any. I'd be more than happy to help you!"
-
-    f "I love meeting new people and teaching people new things. Makes everyone happy!"
+    f "You've got a fish in your hands. Nice!"
 
     f "This place you're in right now is the market. You can just stand here and someone will buy fish from you."
 
@@ -701,7 +592,7 @@ label ft2:
             f "Well, it's not like I'm a human cannibal!"
             
             show fish eek
-            f "Humans are too precious to be eaten as food."
+            f "Humans are too precious for that. I don't support the human meat industry!"
 
     show fish
     f "Anyway, let's get fishing. I got some bottom trawls we can use."
@@ -767,25 +658,23 @@ label ft2:
                             "The lights can target different species":
                                 f "Oh! That's very useful."
 
-                                f "Now that I think about it, I remember Kelp telling me something about that."
+                                f "Now that I think about it, I remember Candy telling me something about that."
 
-                                f "Kelp might've given me some of those things."
+                                f "She might've given me some of those things."
 
-                                m "What's your opinion on Kelp?"
+                                m "What's your opinion on Candy?"
 
-                                f "Well, I think Kelp's great. Cares just the right amount about this world."
+                                f "Candy's a preachy nature activist."
 
-                                f "Not too preachy about the environment, but cares just as much as those stupid nature activists."
-
-                                f "If only every nature activist was like Kelp. Too bad they're too busy virtue signaling."
+                                f "Half of what she says feels like virtue signaling."
 
                                 f "\"Oh look at me! I care about the environment and global warming and the animals!\""
 
                                 show fish serious
-                                f "Makes me want to pour kerosene everywhere just to spite them."
+                                f "Makes me want to pour kerosene everywhere."
                                 show fish -serious
 
-                                f "Kelp is kind to me, even though we don't see eye to eye on a lot of things. Kelp is truly a good person."
+                                f "Though, she is kind to me, even though we don't see eye to eye on a lot of things. She's a good person."
 
                                 show fish daring
                                 f "Too bad I'm not! There's gotta be some bad in this world too. Makes you appreciate the good."
@@ -929,11 +818,11 @@ label lednet:
 
             f "I can't do anything in this town without getting in trouble."
 
-            f "That Candy girl would get me a life sentence in jail."
+            f "Candy would get me a life sentence in jail."
 
-            m "Oh?"
+            m "Really?"
             show fish -serious
-            f "You don't know? She got a guy sentenced to 15 years in prison for dynamite fishing."
+            f "Probably! She got a guy sentenced to 15 years in prison for dynamite fishing."
 
             show fish serious
             f "How absurd! They're just fish! I don't see what the big deal is."
@@ -1057,11 +946,11 @@ label candyRoute:
 
     show candy with moveinright
 
-    c "Hey Tin!"
+    c "Hey, Tin."
 
     c "I've been looking for you. Where did you go?"
 
-    m "I went fishing with Kelp and then with Fish."
+    m "I went fishing with Fish."
     show candy surprised
     c "FISH?!?!?!?!"
 
@@ -1079,30 +968,25 @@ label candyRoute:
     show candy smirk
     c "Oh, he told you about that? Just so you know, that's not entirely accurate."
     show candy -smirk
-    c "i'm not judge, jury, or executioner, I'm just a caring citizen."
+    c "I'm not judge, jury, or executioner, I'm just a caring citizen."
 
     c "All I did was ensure that they could not get out on bail."
 
     c "They still have parole and I had nothing to do with the length of the sentence."
-
-    show kelp at right with easeinright
-    k "Hi guys!"
-    show candy at left with ease
-    c "Hi, Kelp! Haven't seen you in a while."
-
-    c "I heard you went fishing with Tin?"
-
-    k "Yep! I thought it went quite well, up until the end.."
-
+    show candy look
+    c "Anyways...About our last fishing trip.."
+    show candy -look
     m "Sorry about that, I was too harsh. Fishing talk just bores me."
 
-    k "With all due respect, why are you a fisher then?"
+    c "With all due respect, why are you a fisher then?"
 
     m "I never wanted to be a fisher. This is just a fishing town."
 
     menu:
-        "I lowkey don't even like any of you":
+        "I lowkey don't even like you":
             c "Wow."
+
+            c "????"
 
         "But I'm adjusting":
             m "I guess I'm a little on edge ever since my house burned down."
