@@ -38,7 +38,7 @@ init python:
         count_clicks = True
         countdown_time = 5
 
-default badpoints= 0
+default badChoice = False
 default caff = 0
 default faff = 0
 
@@ -50,7 +50,7 @@ default countdown_time = 5
 define c = Character("Candy", color="#1d7e42", callback=beepy_voice)
 define m = Character("Me", color="#B20100", callback=beepy_voice)
 define f = Character("Fish", color="#2b3b7f", callback=beepy_voice)
-define t = Character("???", color="#105c53", callback=beepy_voice)
+define t = Character("???", color="#ae7906e0", callback=beepy_voice)
 
 image candy = "defcan.png"
 image candy surprised = "supcan.png"
@@ -63,8 +63,12 @@ image fish serious = "srsfish.png"
 
 image net = "netplace.png"
 image castnet = "castnet.png"
+image trawlNetSide = "trawlNetSide.png"
 image dynamite = "dynamite.png"
+image litDynamite = "litDynamite.png"
 image fishie = "fishtopher.png"
+image fishSilhouettes = "fishSilhouettes.png"
+image seaPlants = "seaPlants.png"
 
 image bg townent = "townEntrance.png"
 image bg mhouse = "mhouse.png"
@@ -74,6 +78,7 @@ image bg fboat = "fboat.png"
 image bg flash = "flash.png"
 image bg purple = "purple.png"
 image bg mini1 = "mini1.png"
+image bg seaFloor = "seaFloor.png"
 
 label start:
     scene bg townent with fade
@@ -96,9 +101,7 @@ label start:
     m "I bet she's really happy I'm moving into Salmontin."
     
     m "Salmontin? I wonder if anyone here is called \"Salmon.\" Or \"Fish.\""
-
     show candy with zoomin
-
     c "...Tin? Hey hey hey, Tin! You're here pretty early."
 
     m "Haha, yep! I'm kinda surprised too."
@@ -122,8 +125,9 @@ label start:
             c "Like, personally? If so, I have some good news for you…"
 
     show candy -surprised
-        
-    c "Y'know, I like fish both as an animal and as a dish. Speaking of fish..."
+    c "Y'know, I like fish as an animal but not as a dish. I don't like the taste of seafood in general."
+    
+    c "Speaking of seafood and fish..."
 
     c "I know you just got here, but we should fish now before it gets dark. It's best you learn how to fish as soon as possible."
 
@@ -140,17 +144,13 @@ label start:
     c "Welcome aboard matey! My grand green galleon!"
 
     m "...A galleon?"
-
     show candy surprised
-
     c "It's a type of ship...Like the one pirates have..You don't follow pirate lore?"
 
     m "?"
-
     show candy smirk
     c "...Moving on. This boat isn't a galleon by the way. And there aren't many pirates around these waters anyway."
     show candy -smirk
-
     c "And especially not in the spot we're at right now. Nice and uncrowded, good for beginner fishers like yourself."
 
     show castnet at Position(xpos=640, ypos=500) with easeinbottom
@@ -186,13 +186,11 @@ label start:
     c "To do this, you need to use the right fishing methods."
     
     c "Don't use bottom trawls. Bottom trawls are nets dragged across the sea floor. Very destructive!"
-
     show candy surprised
     c "And don't use dynamite???? That is really illegal. But I've seen it happen, unfortunately."
     show candy smirk
     c "Best to stick with the methods I show you."
     show candy -smirk
-
     c "Oh, and one last rule. Don't work for big fisheries! You're plenty fine on your own."
 
     m "What are fisheries?"
@@ -220,9 +218,7 @@ label start:
     c "Well, see ya later, alligator!"
 
     m "See ya!"
-
     hide candy with easeoutright
-
     m "Home sweet home..."
 
     m "Looks just like my old home."
@@ -236,15 +232,11 @@ label start:
     m "Yawwwwn"
 
     m "...Who is that at the door?"
-
     show fish with fade
-
     f "Well hello there! Ny name's Fish!"
-
     show fish eek
     f "Welcome to Salmontin, Tin! (heheheh, tin tin...)"
     show fish -eek
-
     m "(Is everyone gonna say this?)"
 
     f "The town is very excited to get to know you. We've heard a bit about you already and you seem great."
@@ -254,25 +246,19 @@ label start:
     m "One more fishing buddy couldn't hurt."
 
     f "You have one already? Who is..."
-
     show fish serious
     f "Oh."
     show fish daring
-
     f "Candy, right?"
     show fish -daring
     m "Yep."
-
     show fish eek
     f "Heh, I know her! She's one of the best fishers in town. Not as good as me though!"
     show fish -eek
-
     f "Y'know, you might hear some rumors about her, but I wouldn't pay them any mind. A lot of people stretch the truth."
-
     show fish daring
     f "And before you ask, no I won't tell you what those rumors are."
     show fish -daring
-
     m "(I was gonna ask...)"
 
     f "Don't mention it to her either, it makes her very upset."
@@ -319,8 +305,6 @@ label start:
                 
                 c "Longlines, like the name implies, are long lines with a bunch of baited hooks attached. There's buoys keeping the line afloat."
 
-                c "Another good fishing method is harpooning. You just aim and throw. It's very fun!"
-
                 c "Any other questions?"
 
             "What does overfishing do?":
@@ -339,17 +323,17 @@ label start:
                 c "Fishing subsidies are monetary grants given by the government to help fisheries. You'd think they help, but they don't!"
 
                 c "All it does is encourage fisheries to overfish to make more money. Bad for everyone else, and for themselves too, but they can only think in the present moment, apparently."
-
                 show candy surprised
                 c "Even the fish were tired of it! They whispered to me..."
                 show candy -surprised
-
                 c "Oh! By the way, fishery means fishing industry, at least in general. Did I mention that already?"
 
                 c "Any other questions?"
 
-            "The rumors about you?" if knorumor == False:
-                $ caff -= 1
+            "The rumors about you?":
+                if knorumor == False:
+                    $ caff -= 1
+
                 c "..."
 
                 show candy look
@@ -358,7 +342,7 @@ label start:
                 m "Fish told me. He wasn't specific though."
 
                 show candy surprised
-                c "He's one to talk! Rumor has it that he's the town's worst fisher!"
+                c "He's one to talk! Rumor has it that he's the town's worst fisher! According to me at least."
                 show candy -surprised
 
                 show candy look
@@ -372,11 +356,11 @@ label start:
 
                 c "Oh! I almost forgot. I need to tell you about this amazing new fishing technology, LED nets."
 
-                c "They're nets with LED lighting that are great for targeting specific species since different LED colors attract different species."
+                c "They're nets with LED lights attached to the perimeter. They're great for targeting specific species since different LED colors deter different species."
 
-                c "Different species have different responses to the different lights. Pretty cool!"
+                c "Green lights deter sea turtles, and blue lights deter small cetaceans, which are whales, dolphins, and porpoises."
 
-                c "They're also great at reducing bycatch! Bycatch is the unintentional capture of non-target species when trying to catch other species. It's against this town's rules to have too much bycatch."
+                c "This is great for reducing bycatch! Bycatch is the unintentional capture of non-target species when trying to catch other species. We only want to catch fish, not creatures like turtles."
 
                 c "I've been introducing these nets to all the fishers in town. Since then, a lot less turtles have been caught in nets. Turtles are my favorite animal."
 
@@ -412,7 +396,6 @@ label contin1:
     
             c "gashgfajdksgfjgfjhahaaAAAAA"
             show candy -surprised
-
             c "I enjoy your company too."
 
             c "You are a nice person, Tin."
@@ -439,9 +422,7 @@ label contin1:
 
 label canless:
     c "..."
-
     show candy look with hpunch
-
     c "Wow."
 
     c "I'm going to sail us back to the dock. Don't talk to me for a while, ok?"
@@ -469,7 +450,7 @@ label canRoute:
 
     c "See? Nice and easy. The townspeople here are reasonable, so you can usually agree to the first price offered."
 
-    c "Keep the money, I insist."
+    c "You can keep the money."
 
     m "Thanks, Candy!"
 
@@ -485,7 +466,10 @@ label canRoute:
 
     c "Just be wary of people's actions. Some people are very friendly, but very selfish too."
 
-    c "..I know I said I wouldn't talk about this, but it's best you hear it from me."
+    if knorumor == False:
+        c "..I know I said I wouldn't talk about this, but it's best you hear the real story from me."
+    else:
+        c "I don't know if you heard, but there are some rumors about me. It's best you hear the real story from me."
 
     c "A couple months ago, there was an incident. There used to be a fisher in this town, a horrible fisher who used horrible fishing methods."
 
@@ -495,20 +479,23 @@ label canRoute:
 
     c "This person was very rich, so they were planning on getting out on bail, but I convinced the judges that what they did was too severe to allow for bail."
 
+    c "Y'know, small town things."
+
     c "A lot of people think the punishment was too severe. The fisher was quite young and had a bright future."
 
     c "It kind of makes me feel guilty."
 
     c "I was holding off on telling you about this incident because I worried it would affect how you view me."
     show candy -look
-    c "If you're still cool with me, we could fishing tomorrow. I'm could teach you sustainable fishing methods."
+    c "If you're still cool with me, we could fishing tomorrow. I could teach you sustainable fishing methods."
 
     m "Sure."
-    show candy surprised
-    c "Wait...I just realized I forgot about something."
-    show candy -surprised
-    c "Wait right here, I'll be back in a minute."
+
+    t "Hey Candy!!! You suck!! How can you live with yourself?!"
+
+    c "Hold on one second, Tin. I'll be right back, I need to go kick someone real quick."
     hide candy with easeoutleft
+    m "What"
     show fish daring at right with easeinright
     f "Hello again…"
     show fish -daring at center with ease
@@ -518,20 +505,219 @@ label canRoute:
 
     f "Oh, that's fine. I'll wait for her too."
 
+    t "YOWCH!"
+    show candy smirk at left with easeinleft
+    c "Hey, Fish."
     
+    f "Hey, Candy."
+    show candy -smirk
+    f "I'm planning on taking Tin to go fishing now."
+    show candy surprised
+    c "Oh, really? I'll come with you two, then! That'd be fun, right?"
+    show candy -surprised
+    f "Sure. Let's take my boat."
+
+    scene bg fboat
+    show candy at left
+    show fish at center
+    with fade
+
+    f "What have you taught Tin?"
+
+    c "I've taught Tin about the town's fishing rules and some good fishing methods."
+
+    f "Ok, have you taught Tin about bottom trawling yet?"
+
+    c "Yes, I've taught that it's bad!"
+    show fish serious
+    f "Don't hate on one my favorite fishing methods..."
+    show candy smirk
+    c "Don't you know it's really harmful to the ecosystem and environment? It has an insane amonut of bycatch."
+
+    c "Everything gets caught in the trawl nets...Plants, animals...How can the ecosystem recover from the loss of so much stuff?"
+    show candy -smirk
+    show fish -serious
+    f "..I never thought of it that way."
+
+    f "Then what do you suggest we use instead?"
+
+    c "Oh! Do you still have those LED nets I gave you?"
+
+    f "I'll have to check."
+    hide fish with easeoutbottom
+    f "Hmm.. Yep..."
+    show fish
+    show net
+    with easeinbottom
+    f "Here it is!"
+
+    m "What do the lights do again?"
+
+    c "Green lights deter sea turtles, and blue lights deter small cetaceans, which are whales, dolphins, and porpoises."
+
+    f "There are usually lots of turtles during this hour. Let's use those green ones."
+    hide net with easeoutright
+    c "While we wait, let's catch up. How have y'all been?"
+
+    menu:
+        "Good":
+            c "That's good to hear!"
+
+        "Bad":
+            f "Why? Did something happen?"
+
+            m "I'd rather not talk about it."
+
+            f "Ok."
+
+        "I don't know":
+            c "That's ok, I know life has been stressful for you lately."
+
+    f "I've been doing fine."
+
+    c "That's good."
+
+    m "How have you been, Candy?"
+
+    c "Good. I've been having lots of fun fishing with you."
+    show fish daring
+    f "Heh! I don't know if Tin has been having fun with you, though. The way you fish is so boring."
+    show fish -daring
+    show candy smirk with hpunch
+    c "Well at least I don't leave carnage everywhere I fish, Fish!"
+    show fish daring
+    f "Oh? Since when have you ever seen me fish?"
+
+    c "I don't have to see you fish to know that you've fished. I can tell by how much damage you leave behind!"
+
+    f "Why are you blaming me for all of the so called \"damage\" around here?! It's not just me."
+   
+    c "What do you mean \"so called\"?? Don't you notice the lack of fish and other stuff in the sea??"
+
+    f "Yeah, but not as much with the way I fish, I don't. If you're lacking fish, then don't blame me, blame yourself for not fishing better."
+
+    c "Sure sure, keep it up. Soon even your fishing methods won't work when there's literally no fish."
+
+    c "You're literally selFISH. By fishing basically all of what's left of our ecosystem, you're making it harder for anyone else to catch fish."
+
+    f "You're being dramatic. There are still plenty of fish. And what does it matter to me? I can always move and other people can too."
+
+    c "Are you serious? No, not everyone can afford to move, and part of it is because you make it so hard to catch enough fish to make a living."
+
+    f "There are plenty of other jobs in Salmontin."
+
+    c "Are you really saying other people should find different jobs when the reason they have to is because of you?"
+
+    f "Listen here Candy, if you want to save the ecosystem or whatever so badly, then you should stop fishing. And stop forcing other people to fish."
+
+    c "I need the money from fishing, I have responsibilities. You wouldn't get it. Tin does too, that's why I'm teaching Tin how to fish SUSTAINABLY. I'm not gonna stop because of you."
+
+    f "Hey Tin, do you even like fishing?"
+
+    menu:
+        "Yeah":
+            show fish serious
+            c "See? Why do you want us to be miserable? Fishing is awesome."
+
+            f "Yeah yeah whatever."
+            show candy -smirk
+            c "Let's haul the net up. Enough time has passed."
+
+            return
 
 
-    return
+        "No":
+            show candy look
+            show fish -daring
+            f "See? Tin doesn't like to fish, so you should stop forcing Tin to fish. One less environmental impact."
+
+            c "I had no idea..."
+
+            c "I'm sorry Tin, I guess I never asked you if you really wanted to fish."
+            show candy -look
+            c "What would you like to do instead? I'm not on good terms with many people but I'll try to get you a job."
+
+            menu:
+                "Bartender":
+                    c "I know a club that could use one. No problem!"
+
+                    m "Let's head there after this fishing trip. We can hang out there."
+
+                    f "I'm coming along."
+
+                    c "Sure. But only if you follow my advice and start fishing sustainably."
+
+                    f "Deal."
+
+                    c "Don't forget, I will know if you break your end of the deal."
+
+                    f "I won't. I'm serious about my deals."
+
+                    scene bg townent with fade
+                    "<A RETROSPECTIVE>"
+
+                    m "We had a blast at the bar. Candy and Fish worked out their differences and became friends."
+
+                    m "He said he enjoys our company and that we make this town worth staying in. We're all besties for life!"
+                    
+                    m "He wants to make sure Salmontin stays lively, so he stopped using harmful fishing practices and fishing in prohibited areas."
+
+                    m "I'm really happy here. We all go on a lot of fun adventures around town and at the club where I work."
+
+                    m "As a bartender, I chat with lots of people. I've been able to convince people to stop judging Candy so harshly."
+
+                    m "Now we have a lot more friends and aquaintances."
+
+                    m "Salmontin relies on a strong marine ecosystem for food and money, so we as a town only fish as much as we need to."
+
+                    m "Even though I don't like fishing myself, I still support my fisher friends with things related to it."
+
+                    m "We use LED nets when fishing so that nothing other than our target species gets caught. This helps keep our ecosystem stable."
+
+                    m "We make sure each of us has sustainable fishing habits because every action of ours builds up. We also keep watch and confront people fishing unsustainably."
+
+                    m "Fish is really good at catching bad fishers, he always knows where to find them. Candy and I have persuaded tons of bad fishers to change their ways."
+
+                    m "I love Salmontin. You're accepted whether you like fishing or not."
+
+                    "The End (Tender Ending)"
+
+                    return
+
+                "Detective":
+                    c "That's cool! Salmontin could use someone who can figure out who keeps overfishing."
+                    show fish daring
+                    f "Let's hope you're not too good, heheh."
+                    show fish -daring
+                    c "Got any ideas?"
+
+                    m "We could put GPS tracking technology on boats that tell us their location."
+
+                    m "We could monitor them to make sure they're not fishing in prohibited areas."
+
+                    m "We could also use the info to figure out who could be overfishing and send people to monitor them."
+
+                    m "Could we work out something with the mayor to implement this?"
+
+                    c "I'm sure we could. Great idea, Tin!"
+
+                    f "You're smarter than you look, kid."
+
+                    m "Thanks!"
+
+                    scene bg townent with fade
+                    "<A RETROSPECTIVE>"
+
+                    m "And so, Salmontin became ."
+
+                    return
 
 label fishRoute:
     scene bg market with fade
-
     m "..Candy really just disappeared."
 
     m "And I'm just here with a fish in hand."
-
     show fish with easeinbottom
-
     f "Hello there.."
 
     m "Hello"
@@ -559,29 +745,17 @@ label fishRoute:
     f "..So, what do you think? About fishing with me?"
 
     menu:
-        "I heard you're a bad fisher":
-            jump ft1
+        "How do I know you're a good fisher?":
+            f "There's only one way to find out. If you've gotta see to believe, then so be it."
+
+            menu:
+                "..Ok":
+                    jump fishTrip
 
         "Sure!":
-            jump ft2
+            jump fishTrip
 
-label ft1:
-    
-    show fish daring
-    f "Oh really?"
-    show fish -daring
-
-    f "You shouldn't believe everything you hear, you know."
-
-    f "That fact? It may be true, it may not be."
-
-    f "Want to find out?"
-
-    menu:
-        "..Ok":
-            jump ft2
-
-label ft2:
+label fishTrip:
     f "Great! Then we'll fish right now! I've got food on my boat if you're hungry."
 
     scene bg fboat
@@ -614,13 +788,16 @@ label ft2:
     show fish
     f "Anyway, let's get fishing. I got some bottom trawls we can use."
 
+    m "( Hmm..Didn't Candy say that those were bad for the environment?)"
+
     menu:
         "Sounds good!":
             f "That's the spirit!"
-            $badpoints += 1
+            $ badChoice = True
+            jump bottomtrawl
 
         "Can we use something else?":
-            m "Bottom trawling is really bad for the environment and the fishies, so I don't want to do that."
+            m "Bottom trawling is really bad for the environment and the ecosystem, so I don't want to do that."
 
             show fish serious
             f "Says who? I've been bottom trawling for 20 years and there are still fish in the ocean!"
@@ -664,11 +841,9 @@ label ft2:
                             "It's so you don't need a flashlight":
                                 $ faff -= 1
                                 f "Oh! What??"
-
                                 show fish daring
                                 f "Sorry, but that sounds really stupid."
                                 show fish -daring
-
                                 f "Let's just use regular ol' cast nets."
                                 jump castnet
                             
@@ -683,10 +858,9 @@ label ft2:
 
                                 f "Candy's a preachy nature activist."
 
-                                f "Half of what she says feels like virtue signaling."
+                                f "Half of what she says feels like virtue signalling."
 
                                 f "\"Oh look at me! I care about the environment and global warming and the animals!\""
-
                                 show fish serious
                                 f "Makes me want to pour kerosene everywhere."
                                 show fish -serious
@@ -698,19 +872,25 @@ label ft2:
                                 jump lednet
 
 label bottomtrawl:
+    f "I bottom trawl all the time, so I've got it half set up already. I've got one end attached to the back of my boat."
     hide fish with easeoutbottom
-    f "Hmm.. yep."
-
+    f "I just need to throw the rest of the net into the water."
     show fish at left with easeinbottom
-    f "Here they are!"
+    f "Done. Now we sail the boat forward."
 
-    f "I use these nets all the time! Do you know how to use them?"
+    scene bg seaFloor
+    show seaPlants
+    show fishSilhouettes
+    with fade
+    show trawlNetSide with easeintop
+    hide seaPlants
+    hide fishSilhouettes
+    hide trawlNetSide
+    with easeoutright
 
-    m "Nope"
-
-    f "Then I'll show you."
-
-    "PLACEHOLDER TEXT - TIMESKIP :3"
+    scene bg fboat
+    show fish at left
+    with fade
 
     f "Nice haul! It's got a bit of debris in there, but no harm no done!"
 
@@ -728,10 +908,23 @@ label bottomtrawl:
                     show fish daring
                     f "What? Never had fun before? Had too much fun already? Come on!"
 
-                    "..."
+                    menu:
+                        "That would get us in trouble":
+                            show fish -daring
+                            f "I guess it would get us in big trouble. You're right, it's better not to risk it."
 
+                        "You have the brain of a plankton":
+                            f "Sheldon J. Plankton! Not everyone can comprehend my genius."
+                            $ faff -= 2
+
+                    f "Let's head back to the market."
+
+                    jump steadyEnd
+
+
+
+                    "..."
                     show fish -daring
-                    f "If you insist, then let's head back to the market."
 
                     jump steadyEnd
 
@@ -770,10 +963,9 @@ label castnet:
                     show fish daring with hpunch
                     f "Whoa there!"
 
-                    f "I'm not that old! I'm only 55."
+                    f "Listen here kid, I'm not that old! I'm only 55."
 
                     f "Alrighty then, let's head back to the market."
-
                     show fish serious
                     f "Kids these days..."
 
@@ -790,7 +982,6 @@ label castnet:
                     f "What? Never had fun before? Had too much fun already? Come on!"
 
                     "..."
-
                     show fish -daring
                     f "If you insist, then let's go back to the market..."
 
@@ -802,7 +993,6 @@ label castnet:
 label lednet:
     hide fish with easeoutbottom
     f "Hmm.. yep..."
-
     show fish at left
     show net
     with easeinbottom
@@ -826,7 +1016,6 @@ label lednet:
         "How so?":
             $ faff += 1
             f "..Hm."
-
             show fish serious
             f "It's so peaceful it's boring."
 
@@ -837,7 +1026,6 @@ label lednet:
             m "Really?"
             show fish -serious
             f "Probably! She got a guy sentenced to 15 years in prison for dynamite fishing."
-
             show fish serious
             f "How absurd! They're just fish! I don't see what the big deal is."
             show fish -serious
@@ -857,10 +1045,8 @@ label lednet:
                 "You are stupid":
                     $ faff -= 2
                     m "It obviously affects the entire ecosystem. Dynamite explodes stuff, you know?"
-
                     show fish serious
                     f "You're so pretentious. Petulant fool."
-
                     f "I'd throw you overboard so you could be one with the ecosystem, but unfortunately that would count as attempted murder."
                     show fish daring
                     f "Heh! You are truly a friend of Candy. As soon as we reach the dock, you better be off my boat before I even blink."
@@ -880,22 +1066,23 @@ label lednet:
 label dynamiteEnd:
     hide fish with easeoutbottom
     f "Let me see where I put them..."
-
     show fish at left
     show dynamite at Position(xpos=640, ypos=400)
     with easeinbottom
-    
-    f "Aha! Haven't used these in a long time. It's been a few months."
-
-    f "You got a good throwing arm?"
+    f "Aha! Haven't used these in a long time. It's been a few months. I had to flee the last town I used it at."
+    hide dynamite
+    play sound "tssss.mp3"
+    show litDynamite at Position(xpos=640, ypos=400)
+    with Dissolve(2.0)
+    f "It's lit! You got a good throwing arm?"
 
     m "They call me the pitcher."
-    hide dynamite with easeoutright
-    scene bg flash with hpunch
+    hide litDynamite with easeoutright
+    play sound "explosion.mp3"
+    scene bg flash with vpunch
     scene bg fboat
-    show fish daring at left
+    show fish at left
     with dissolve
-
     f "Nice throw! Let's sail over there now."
 
     "..."
@@ -905,16 +1092,22 @@ label dynamiteEnd:
     t "Hey!! No dynamite allowed!!"
     show fish -serious
     f "Welp. This is why I fish at night. See ya in jail."
+
     scene bg purple with fade
-    "(Dial tone)"
+    stop music fadeout 5.0
+    "(Dial in progress...)"
 
-    ".."
+    "..."
 
-    f "Hey Candy, it's Tin."
+    m "Hey Candy, it's Tin."
 
     c "..Hey."
 
-    c "Um, I have some good news for you. You'll get a lesser sentence than Fish."
+    c "You ok?"
+
+    m "Not really."
+
+    c "Well um, I have some good news for you. You'll get a lesser sentence than Fish."
 
     c "Yeah, we've been collecting evidence and we have a strong case against him."
 
@@ -979,19 +1172,28 @@ label steadyEnd:
 
         jump candyMeet
 
-    f "That guy over there looks like they could some fish. One second."
+    f "That guy over there looks like they could use some fish. One second."
     hide fish with easeoutright
     f "..Fish needed?"
 
     t "Fish needed affirmative."
 
-    f "Does 75 dollars sound good?"
+    f "100 dollars. Take it or leave it."
 
-    t "Sure! Thanks!"
+    if badChoice == True:
+        t "What?! But there's a bunch of debris in these!"
+
+        f "It's super debris. Super rare. Take it. Or leave it."
+
+    t "It seems like what you have is not worth what I'm paying."
+
+    f "..."
+    
+    t "No no, I'll accept!"
     show fish daring with easeinright
     f "That is how experts do it."
     show fish -daring
-    f "And here's your 15 dollars."
+    f "And here's your 25 dollars."
 
     f "You should go and explore the town now and get some stuff. There's a lot of fun places."
 
@@ -1003,15 +1205,19 @@ label steadyEnd:
 
     m "Byeeee!"
     hide fish with easeoutright
-    
+
     jump candyMeet
 
 label candyMeet:
     m "These past two days have been crazy. First I move into town and then I find out crazy stuff."
 
     m "Now that I have time to reminisce, I'm recalling what I said to Candy on our last fishing trip."
-    
-    m "Maybe I should apologize. I'm trying to make friends in this town, not lose them."
+
+    if badChoice == True:
+        m "I don't regret it. She was making me fish without even asking me first, it's only natural I get annoyed."    
+    if badChoice == False:
+        m "Maybe I should apologize. I'm trying to make friends in this town, not lose them."
+
     show candy with moveinleft
     c "Hey, Tin."
 
@@ -1023,11 +1229,14 @@ label candyMeet:
 
     c "He didn't make you use dynamite, did he?"
     
-    f "No"
+    m "Nope."
     show candy smirk
     c "That's a relief."
     show candy -smirk
     c "That would be bad."
+
+    if badChoice == True:
+        jump unfrenCan
 
     m "..About our last fishing trip, I'm sorry for what I said to you, it wasn't personal. Fishing talk just bores me."
 
@@ -1048,8 +1257,9 @@ label candyMeet:
     m "We can be good influences for him."
 
     c "..I'll think about it."
+
     scene bg townent with fade
-    "<A RETROSPECT>"
+    "<A RETROSPECTIVE>"
 
     if faff < -2:
         jump cycleEnd
@@ -1062,15 +1272,87 @@ label candyMeet:
 
     m "He found a town he wants to stay in, and now he's trying not to destroy it so that Salmontin stays lively."
 
-    m "Salmontin relies on a healthy marine ecosystem for food and money, so we only fish as much as we need to. When demand is low, we use fishing rods."
+    m "Salmontin relies on a strong marine ecosystem for food and money, so we only fish as much as we need to. When demand is low, we use fishing rods."
 
     m "We also use LED nets when fishing so that nothing other than our target species gets caught. This helps keep our ecosystem stable."
 
-    m "We make sure each of us is has sustainable fishing habits because every action of ours builds up. We also keep watch and confront people fishing unsustainably."
+    m "We make sure each of us has sustainable fishing habits because every action of ours builds up. We also keep watch and confront people fishing unsustainably."
 
     m "I'm really happy here. Candy takes me on a lot of fun adventures around town. We rarely go fishing together, though. I usually fish by myself or with my other friends."
 
     "The End (Steady Ending)"
+    return
+
+label unfrenCan:
+    show candy look
+    c "Anyways...About our last fishing trip.."
+
+    c "..."
+
+    c "Did you really mean that?"
+
+    m "You made me fish without even asking me if I wanted to. Why wouldn't I be bored listening to someone talk about something I don't want to do?"
+
+    c "I'll admit I was a bit pushy about fishing, but I was just excited to show you my favorite activity. I didn't mean to make you upset."
+
+    c "I wanted to share my joy with you. You didn't have to be so rude about it."
+
+    m "I didn't have to, but I wanted to. I do what I want."
+
+    c "I don't think we can be friends anymore."
+
+    m "That's one thing we can agree on."
+    hide candy with easeoutleft
+
+    scene bg townent with fade
+    "<A RETROSPECTIVE>"
+
+    m "After I ended my friendship with Candy, I ended up becoming a lone fisher. Other fishers heard how rude I was and started avoiding me."
+
+    m "I didn't mind. Fishing by myself meant I could fish however I wanted. No one could tell me what to do or what not to do."
+
+    if faff < -2:
+        m "I could go bottom trawling as much as I wanted to."
+
+        m "But gradually, less and less sea creatures appeared in the water."
+
+        m "In response, the town placed restrictions on how much you could fish, but I ignored them."
+
+        m "One day, I was bottom trawling when I got caught."
+
+        m "I had to go to court and they were trying to hold me responsible for all of the environmental damage around town."
+
+        m "I didn't realize they had a lot of evidence of my wrongdoing. I didn't cover up my tracks well."
+
+        m "I got a long sentence. So many years."
+        
+        if caff < -2:
+            m "No possibility of parole. Will I ever see the light of day again?"
+        else:
+            m "There's still a possibility of parole, though. Maybe I can turn my life around."
+
+        "The End (Lone Ending)"
+        return
+
+    m "However, there was one person who didn't avoid me: Fish. We went fishing sometimes and it was so much fun."
+
+    m "We talked about how pretentious this town was and how particular they were about their fishing methods."
+
+    m "We could go bottom trawling as much as we wanted to. He offered me lots of tips on how not to get caught."
+
+    m "But gradually, less and less sea creatures appeared in the water."
+
+    m "In response, the town placed restrictions on how much you could fish, but I ignored them."
+
+    m "One day, I was bottom trawling by myself when I got caught."
+
+    m "I had to go to court and they were trying to hold me responsible for all of the environmental damage around town."
+
+    m "I was offered a lighter sentence if I named any co-conspirators. I named Fish."
+
+    m "I've burned all my bridges in Salmontin."
+
+    "The End (Betrayal Ending)"
     return
 
 label cycleEnd:
@@ -1078,22 +1360,23 @@ label cycleEnd:
 
     m "I didn't end up becoming friends with Fish. It seems he doesn't like me that much."
 
-    m "Salmontin relies on a healthy marine ecosystem for food and money, so my friends and I only fish as much as we need to. When demand is low, we use fishing rods."
+    m "Salmontin relies on a strong marine ecosystem for food and money, so my friends and I only fish as much as we need to. When demand is low, we use fishing rods."
 
     m "We also use LED nets when fishing so that nothing other than our target species gets caught. This helps keep our ecosystem stable."
 
     m "We make sure each of us is has sustainable fishing habits because every action of ours builds up. We also keep watch and confront people fishing unsustainably."
 
-    m "There's a few people who fish at night that we've never been able to catch. They overfish and uses unsustainable fishing methods, but they always escape when we try to catch them."
+    m "However, there's a few people who fish at night that we've never been able to catch. They overfish and uses unsustainable fishing methods, but they always escape when we try to catch them."
 
-    m "Local fishers have been reporting a decrease in fish in the sea. It's getting harder to fish, and in turn, marine prices have gone up. Limits have gotten stricter for how much you can fish."
+    m "Local fishers have been reporting a decrease in fish in the sea. It's getting harder to fish, and in turn, it's getting harder for fishers to makes money, driving up marine prices for locals."
+    
+    m "Limits have gotten stricter for how much you can fish."
 
-    m "Fishers annoyed by these limits have decided to break the rules whenever and wherever there's no one around."
+    m "Fishers annoyed by these limits have decided to break the rules and fish illegally whenever and wherever there's no one around."
 
-    m "We are trapped in a loop: Fish go down, people have to fish harder, fish go down again!"
+    m "Fish decrease, so restrictions get placed, but some people ignore those restrictions, so fish decrease. Thus, more restrictions get placed, incentivizing even more people to fish illegally."
 
-    "The End (Cycle Ending)"
-
+    m "The End (Cycle Ending)"
     return
 
 label stubbornEnd:
@@ -1141,11 +1424,12 @@ label stubbornEnd:
     c "Say, if you want, I could introduce you to some of my buddies and we could get ice cream together."
 
     m "That sounds great."
+
     scene bg townent with fade
-    "<A RETROSPECT>"
+    "<A RETROSPECTIVE>"
     m "It took some time but, I ended up becoming good friends with a lot of people: Candy and her friends, some of whom are also fishers."
 
-    m "Salmontin relies on a healthy marine ecosystem for food and money, so we only fish as much as we need to. When demand is low, we use fishing rods."
+    m "Salmontin relies on a strong marine ecosystem for food and money, so we only fish as much as we need to. When demand is low, we use fishing rods."
 
     m "We also use LED nets when fishing so that nothing other than our target species gets caught. This helps keep our ecosystem stable."
 
@@ -1159,7 +1443,7 @@ label stubbornEnd:
 
     m "Salmontin's ecosystem never fully recovered from this. Too much of the environment was destroyed."
 
-    m "It got harder and harder to fish. A good chunk of people had to move or switch professions because the marine industry was no longer profitable."
+    m "It got harder and harder to fish. A good chunk of people had to move or switch professions because the marine industry was no longer profitable enough."
 
     m "Seafood became more expensive, which made less people eat at local seafood restaurants."
 
