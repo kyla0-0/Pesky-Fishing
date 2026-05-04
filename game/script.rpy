@@ -1083,6 +1083,8 @@ label castnet:
                     "..."
                     show fish -daring
                     f "If you insist, then let's go back to the market when we're done."
+                    
+                    jump steadyEnd
 
                 "I've always wanted to do this":
                     f "Heh! Your dream is just about to come true."
